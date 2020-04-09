@@ -1,0 +1,25 @@
+.App-header {
+  background-color: #282c34;
+  text-align: center;
+  color: white;
+}
+
+
+.Container{
+  text-align: center;
+  width: 60%;
+  margin: auto;
+  padding: 10px;
+}
+
+@media only screen and (max-width: 991px){
+  .Container{
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 600px){
+  .Container{
+    width: 95%;
+  }
+}

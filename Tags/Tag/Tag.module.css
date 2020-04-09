@@ -1,0 +1,32 @@
+.Tag{
+    height: 40px;
+    background-color: gray;
+    padding: 5px 10px;
+    margin: 2px;
+    color: white;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    border: none;
+}
+
+.Tag:hover{
+    background-color: lightgrey;
+    outline: none;
+}
+
+.Tag:active,
+.Tag:focus{
+    outline: none;
+}
+
+.TagActive{
+    background-color: lightgrey;
+    border: solid black 2px;
+    outline: none;
+}
+
+.TagDisable{
+    background-color: black;
+    color: #282c34;
+}
