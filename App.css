@@ -1,15 +1,39 @@
-.App-header {
-  background-color: #282c34;
-  text-align: center;
-  color: white;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,700;1,300&display=swap');
+
+body{
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
+h1, h2, h3, h4{
+  margin: 0;
+}
+
+h1{
+  font-style: italic;
+}
 
 .Container{
-  text-align: center;
+  position: relative;
   width: 60%;
+  max-width: 991px;
   margin: auto;
-  padding: 10px;
+  clear: both;
+}
+
+.Row{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.Centered{
+  text-align: center;
+}
+
+@media only screen and (max-width: 1345px){
+    .Container{
+        width: 70%;
+    }
 }
 
 @media only screen and (max-width: 991px){
@@ -21,5 +45,14 @@
 @media only screen and (max-width: 600px){
   .Container{
     width: 95%;
+  }
+}
+
+@media only screen and (max-width: 360px){
+  h2{
+    font-size: 1.4rem;
+  }
+  p{
+    font-size: 0.9rem
   }
 }

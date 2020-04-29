@@ -1,0 +1,24 @@
+.Footer{
+  background-color: #282c34;
+  color: white;
+  height: 40px;
+  text-align: left;
+  margin-top: 20px;
+  padding-top: 0;
+}
+
+.Footer p{
+  margin: 0;
+  padding: 10px;
+}
+
+.TmdbLogo{
+    height: 16px;
+    margin-left: 10px;
+}
+
+@media only screen and (max-width: 991px){
+  .Footer{
+      text-align: center;
+  }
+}

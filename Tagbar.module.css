@@ -1,0 +1,27 @@
+.Bar {
+  background-color: #282c34;
+  color: white;
+  transition: max-height .5s ease-in-out;
+  padding: 5px 0;
+}
+
+a{
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.Box{
+  display: flex;
+  justify-content: space-between;
+}
+
+.SeeMore{
+  max-height: 45px;
+  overflow-y: hidden;
+}
+
+.SeeLess{
+  max-height:1000px;
+  overflow-y: hidden;
+}

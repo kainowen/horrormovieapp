@@ -1,0 +1,26 @@
+.Alert{
+  background-color: black;
+  border-radius: 15px;
+  color: white;
+  font-weight: bold;
+  width: 100%;
+  max-width: 800px;
+  height:30px;
+  padding: 3px;
+  margin: 5px auto;
+  box-sizing: border-box;
+}
+
+.Success{
+    border: 3px solid green;
+}
+
+.Fail{
+    border: 3px solid crimson;
+}
+
+@media only screen and (max-width: 450px){
+    .Alert{
+      font-size: 0.8rem;
+    }
+}

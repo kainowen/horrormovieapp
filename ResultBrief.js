@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import classes from "./Results.module.css"
-import axios from "axios"
+import Result from "./Result/Result";
 
 class Results extends Component {
 
@@ -8,65 +7,61 @@ class Results extends Component {
             synopsis: {
                 year:"",
                 plot: "",
-                rated: "",
                 rating: "",
-                poster: "",
-                director: ""
-            }
+                poster: ""
+            },
+            seeMore: false
         });
 
+        seeMoreHandler = () => {
+          const seeMore = this.state.seeMore;
+            this.setState({
+              seeMore: !seeMore
+            });
+        }
+
         componentDidMount() {
-            let queryString = this.props.title.replace(/\s/g, '+');
-
-                if(this.props.title.includes("(")){
-                    const queryStringAppend = queryString.split("").slice(-5, -1).join("");
-                    const queryTitle = queryString.split("").slice(0, -7).join("");
-                    queryString = queryTitle + "&y=" + queryStringAppend;
-                }
-
-            const query = "http://www.omdbapi.com/?apikey=532f8f90&t=" + queryString;
-            axios.get(query)
-                .then(response => {
-                    const details  = response.data;
-                    this.setState({
-                        synopsis: {
-                            year: details.Year,
-                            plot: details.Plot,
-                            rated: details.Rated,
-                            rating: details.imdbRating,
-                            poster: details.Poster,
-                            director: details.Director
-                        }
-                    });
-                })
-                .catch((error => {
+            let tmdbID = this.props.tmdbID
+            const tmdbURL = "https://api.themoviedb.org/3/movie/"+tmdbID+"?api_key=" + //<Your API Key>;
+            fetch(tmdbURL).then(async response => {
+                const details = await response.json();
+                const imgURL = "http://image.tmdb.org/t/p/w185/" + details.poster_path;
+                const year = details.release_date.split("").splice(0,4).join('')
+                this.setState({
+                    synopsis: {
+                        title: details.title,
+                        year: year,
+                        plot: details.overview,
+                        rating: details.vote_average,
+                        poster: imgURL,
+                    }
+                });
+            })
+            .catch((error => {
                 console.log(error)
             }));
-
         }
 
     render() {
-            return (
-                <div className={classes.Container}>
-                    <hr/>
-                    <h2> {this.props.title}</h2>
-                    <div className={classes.Row}>
-                            <p> Year: {this.state.synopsis.year}</p>
-                            <p> Nature: {this.props.nature}</p>
-                            <p> IMDb rating: {this.state.synopsis.rating}</p>
-                            <p> Themes: {this.props.themes}</p>
-                            <p> Rated: {this.state.synopsis.rated}</p>
-                    </div>
-                    <div className={classes.Row}>
-                        <img src={this.state.synopsis.poster} alt="/" />
-                        <div>
-                            <p> {this.state.synopsis.plot}</p>
-                            <p> Directed By: {this.state.synopsis.director}</p>
-                        </div>
-                    </div>
-
-
-                </div>)
+            let themes = Object.keys(this.props.themes);
+            if(themes.length > 0){
+              themes = themes.join(", ");
+            return (<Result
+                    title={this.state.synopsis.title}
+                    year={this.state.synopsis.year}
+                    nature={this.props.nature}
+                    iMDBrating={this.state.synopsis.rating}
+                    themes={themes}
+                    rated={this.state.synopsis.rated}
+                    poster={this.state.synopsis.poster}
+                    plot={this.state.synopsis.plot}
+                    director={this.state.synopsis.director}
+                    seeMore={this.state.seeMore}
+                    clicked={this.seeMoreHandler}
+                />)
+              } else {
+                return null;
+              }
         }
 }
 
